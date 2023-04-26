@@ -10,6 +10,7 @@ import path from 'path'; // ' line 9-10 for file path configuration'
 import { fileURLToPath } from 'url'
 import {register}  from './controllers/auth.controller.js'
 import authRoutes from './routes/authRoutes.js'
+import userRoutes from './routes/userRoutes.js'
 
 // configurations of packages 
 const __fileName=fileURLToPath(import.meta.url) // line 13 -14 only when type modules is used in package json  for getting the file url
@@ -43,6 +44,7 @@ const upload= multer({storage})
 app.post('/auth/register',upload.single('picture'),register);
 
 app.use('/auth',authRoutes)
+app.use('/users',userRoutes)
 
 // mongoose setup
 const port =process.env.PORT || 6000;
