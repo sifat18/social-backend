@@ -8,11 +8,15 @@ import helmet from 'helmet'; //request body security
 import morgan from 'morgan'; // for logging
 import path from 'path'; // ' line 9-10 for file path configuration'
 import { fileURLToPath } from 'url'
+import {register}  from './controllers/auth.controller.js'
+import authRoutes from './routes/authRoutes.js'
 
 // configurations of packages 
 const __fileName=fileURLToPath(import.meta.url) // line 13 -14 only when type modules is used in package json  for getting the file url
 const __dirName= path.dirname(__fileName)
 
+// console.log("__fileName",__fileName)
+// console.log("__dirName",__dirName)
 dotEnv.config()
 
 const app =express()
@@ -33,6 +37,13 @@ const storage= multer.diskStorage({
 })
 // 
 const upload= multer({storage})
+// routes 
+
+// since we have to upload the files thats why this route will be in index file
+app.post('/auth/register',upload.single('picture'),register);
+
+app.use('/auth',authRoutes)
+
 // mongoose setup
 const port =process.env.PORT || 6000;
 mongoose.connect(process.env.MONGO_URL,{
