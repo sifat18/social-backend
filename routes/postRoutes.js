@@ -11,5 +11,5 @@ const router = express.Router();
 router.get("/", verifyToken, getFeedPosts);
 router.get("/:id/posts", verifyToken, getUserPosts);
 // update
-router.get("/:id/like", verifyToken, likePosts);
+router.patch("/:id/like", verifyToken, likePosts);
 export default router;
