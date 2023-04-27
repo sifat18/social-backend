@@ -43,8 +43,8 @@ const upload = multer({ storage });
 // routes with files
 
 // since we have to upload the files thats why this route will be in index file
-app.post("/auth/register", upload.single("picture"), register);
-app.post("/post", verifyToken, upload.single("picture"), createPost);
+app.post("/auth/register", upload.single("picturea"), register);
+app.post("/post", verifyToken, upload.single("picturea"), createPost);
 
 // routes
 app.use("/auth", authRoutes);
@@ -52,7 +52,7 @@ app.use("/users", userRoutes);
 app.use("/posts", postRoutes);
 
 // mongoose setup
-const port = process.env.PORT || 6000;
+const port = process.env.PORT || 3001;
 mongoose
   .connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
